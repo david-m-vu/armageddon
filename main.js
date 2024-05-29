@@ -4,6 +4,63 @@ import * as THREE from "three";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+
+
+const loader = new FontLoader();
+const font = loader.load(
+	// resource URL
+	'/fonts/Inter_Bold.json',
+
+	// onLoad callback
+	function ( font ) {
+		// do something with the font
+    const geometry = new TextGeometry('Scroll and drag to move', {
+      font: font,
+      size: 6,
+      height: 2
+    })
+    const textMesh = new THREE.Mesh(geometry, [
+      new THREE.MeshPhongMaterial({color: 0xff007b}),
+      new THREE.MeshPhongMaterial({color: 0x000000})
+    ])
+
+    textMesh.castShadow = true;
+    textMesh.position.x += 50;
+    textMesh.position.y += 20;
+    textMesh.position.z += 70;
+    textMesh.rotation.y -= Math.PI;
+    scene.add(textMesh)
+
+    const authorText = new THREE.Mesh( new TextGeometry("Project by David Vu", {
+      font,
+      size: 6,
+      height: 2
+    }), [
+      new THREE.MeshPhongMaterial({color: 0x00c3ff}),
+      new THREE.MeshPhongMaterial({color: 0xFFFFFF})
+    ])
+
+    authorText.castShadow = true;
+    authorText.position.x -= 70;
+    authorText.position.y += 20;
+    authorText.position.z -= 30;
+    authorText.rotation.y += Math.PI / 5;
+    scene.add(authorText)
+	},
+
+	// onProgress callback
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+	},
+
+	// onError callback
+	function ( err ) {
+		console.log( 'An error happened' );
+	}
+);
+
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -12,8 +69,6 @@ const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#bg')
 })
 
-const starArr = [];
-
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setSize( window.innerWidth, window.innerHeight);
 camera.position.setZ(30);
@@ -21,10 +76,10 @@ camera.position.setX(-10);
 
 // shapes
 
-const geometry = new THREE.TorusGeometry( 10, 1, 16, 100)
+const geometry = new THREE.TorusGeometry( 30, 1, 16, 100)
 const material = new THREE.MeshNormalMaterial();
 const torus = new THREE.Mesh( geometry, material )
-const torus2 = new THREE.Mesh( new THREE.TorusGeometry( 40, 2, 16, 100), new THREE.MeshNormalMaterial( {color: 0x7a08c2}));
+const torus2 = new THREE.Mesh( new THREE.TorusGeometry( 50, 2, 16, 100), new THREE.MeshNormalMaterial( {color: 0x7a08c2}));
 //const torus3 = new THREE.Mesh( new THREE.TorusGeometry( 20, 1, 16, 100), new THREE.MeshStandardMaterial( {color: 0xD8DAD3}));
 
 scene.add(torus, torus2);
@@ -48,6 +103,10 @@ const controls = new OrbitControls(camera, renderer.domElement);
 //const winterTexture = new THREE.TextureLoader().load("winter.jpg");
 const karinaTexture = new THREE.TextureLoader().load("/karina.jpeg");
 
+
+// stars 
+const starArr = [];
+
 function addStar() {
   const randomRadius= Math.random() * 3
   const star = new THREE.Mesh(
@@ -58,7 +117,7 @@ function addStar() {
     })
   )
 
-  const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread( 100 ));
+  const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread( 200 ));
 
   star.position.set(x, y, z);
   scene.add(star);
