@@ -21,12 +21,10 @@ camera.position.setX(-10);
 
 // shapes
 
-renderer.render( scene, camera );
-
 const geometry = new THREE.TorusGeometry( 10, 1, 16, 100)
-const material = new THREE.MeshStandardMaterial( { color: 0xe1eb34});
+const material = new THREE.MeshNormalMaterial();
 const torus = new THREE.Mesh( geometry, material )
-const torus2 = new THREE.Mesh( new THREE.TorusGeometry( 50, 3, 16, 100), new THREE.MeshStandardMaterial( {color: 0x7a08c2}));
+const torus2 = new THREE.Mesh( new THREE.TorusGeometry( 40, 2, 16, 100), new THREE.MeshNormalMaterial( {color: 0x7a08c2}));
 //const torus3 = new THREE.Mesh( new THREE.TorusGeometry( 20, 1, 16, 100), new THREE.MeshStandardMaterial( {color: 0xD8DAD3}));
 
 scene.add(torus, torus2);
