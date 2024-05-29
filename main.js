@@ -51,8 +51,9 @@ const controls = new OrbitControls(camera, renderer.domElement);
 const karinaTexture = new THREE.TextureLoader().load("/karina.jpeg");
 
 function addStar() {
+  const randomRadius= Math.random() * 3
   const star = new THREE.Mesh(
-    new THREE.SphereGeometry(2, 32, 32),
+    new THREE.SphereGeometry(randomRadius, 32, 32),
     new THREE.MeshStandardMaterial( {
       map: karinaTexture,
       //normalMap: normalTexture
@@ -71,7 +72,7 @@ function addStar() {
   starArr.push(starObject);
 }
 
-Array(500).fill().forEach(addStar);
+Array(300).fill().forEach(addStar);
 
 const backgroundTexture = new THREE.TextureLoader().load("/a.jpeg");
 scene.background = backgroundTexture;
