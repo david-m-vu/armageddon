@@ -40,8 +40,8 @@ const ambientLight = new THREE.AmbientLight(0xFFFFFF);
 scene.add(pointLight, ambientLight);
 
 const lightHelper = new THREE.PointLightHelper(pointLight);
-const gridHelper = new THREE.GridHelper(200, 50);
-scene.add(lightHelper, gridHelper);
+// const gridHelper = new THREE.GridHelper(200, 50);
+scene.add(lightHelper);
 
 // controls
 
