@@ -48,7 +48,7 @@ scene.add(lightHelper, gridHelper);
 const controls = new OrbitControls(camera, renderer.domElement);
 
 //const winterTexture = new THREE.TextureLoader().load("winter.jpg");
-const karinaTexture = new THREE.TextureLoader().load("karina.jpeg");
+const karinaTexture = new THREE.TextureLoader().load("/karina.jpeg");
 
 function addStar() {
   const star = new THREE.Mesh(
@@ -73,7 +73,7 @@ function addStar() {
 
 Array(500).fill().forEach(addStar);
 
-const backgroundTexture = new THREE.TextureLoader().load("a.jpeg");
+const backgroundTexture = new THREE.TextureLoader().load("/a.jpeg");
 scene.background = backgroundTexture;
 
 // Karina
