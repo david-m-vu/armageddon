@@ -16,6 +16,7 @@ const font = loader.load(
 	// onLoad callback
 	function ( font ) {
 		// do something with the font
+    console.log(font);
     const geometry = new TextGeometry('Scroll and drag to move', {
       font: font,
       size: 6,
@@ -131,7 +132,7 @@ function addStar() {
 
 Array(300).fill().forEach(addStar);
 
-const backgroundTexture = new THREE.TextureLoader().load("/a.jpeg");
+const backgroundTexture = new THREE.TextureLoader().load("/aespa-armageddon.jpg");
 scene.background = backgroundTexture;
 
 // Karina
